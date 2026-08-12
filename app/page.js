@@ -12,9 +12,7 @@ export default async function Home() {
   
 
   const data  = await res.json();
-  // const product = data.products[0]
-
-  // console.log("2.Finished waiting")
+  
   return (
     <div>
       <h1>Products</h1>

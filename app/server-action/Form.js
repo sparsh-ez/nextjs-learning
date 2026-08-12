@@ -36,6 +36,11 @@ export default function Form() {
                 <p>{state.success}</p>
             )
         }
+        {
+            state?.error && (
+                <p>{state.error}</p>
+            )
+        }
         
         </form>
     );

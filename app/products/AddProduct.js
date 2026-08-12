@@ -22,7 +22,7 @@ export default function AddProduct() {
 
         const data = await res.json();
         window.location.reload()
-        console.log(data);
+        
     }
 
 

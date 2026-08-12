@@ -16,7 +16,8 @@ export async function sayHello(prevState,formData) {
     }
     if(!str1){
         return {
-            error : "First name is required"
+            error : "First name is required",
+            success:null
         };
     }
     // console.log(a+b)
