@@ -1,11 +1,9 @@
-import { NextResponse } from "next/server";
+import NextAuth from "next-auth";
+import { authConfig } from "./auth.config";
 
-export function proxy(request){
-    const isLoggedIn = request.cookies.get("loggedIn") 
-    if(request.nextUrl.pathname === "/dashboard" && !isLoggedIn) {
-        return NextResponse.redirect(new URL("/login", request.url));
+export default NextAuth(authConfig).auth;
+   
 
-    }
-
-    return NextResponse.next();
-}
+    export const config = {
+        matcher: ["/dashboard/:path*"],
+    };
