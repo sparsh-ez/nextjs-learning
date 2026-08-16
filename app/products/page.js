@@ -1,8 +1,19 @@
+import { connectDB } from "@/lib/db";
 import AddProduct from "./AddProduct";
+import { auth } from "@/auth";
+import Product from "@/models/Product";
 
 export default async function ProductsPage() {
-    const res = await fetch("http://localhost:3000/api/products");
-    const data = await res.json();
+    const session = await auth();
+
+    if(!session?.user?.id) {
+        return <h1>Pleasw login first </h1>
+    }
+    await connectDB();
+    const products = await Product.find({
+        userId: session.user.id
+
+    }).lean();
     
     return (
         <div>
@@ -11,7 +22,7 @@ export default async function ProductsPage() {
             <AddProduct/>
 
             {
-                data.products.map((product) => (
+                products.map((product) => (
                     <div key = {product._id}>
                         <h2>{product.title}</h2>
                         <p>{product.price}</p>

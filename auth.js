@@ -39,8 +39,32 @@ export const {
                 if(!passwordMatch){
                     return null;
                 }
-                return user;
+                // console.log("AUTH USER:", {
+                // id: user._id.toString(),
+                // name: user.name,
+                // email: user.email
+                // });
+
+                return {
+                    
+                    id: user._id.toString(),
+                    name: user.name,
+                    email: user.email
+                };
             }
         })
-    ]
+    ],
+    callbacks: {
+        async jwt({ token, user}) {
+            if(user) {
+                token.id = user.id;
+            }
+            return token;
+        },
+        async session({session, token}) {
+            session.user.id = token.id;
+            return session;
+        }
+        
+    }
 });
